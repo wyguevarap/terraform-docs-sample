@@ -1,0 +1,12 @@
+formatter: markdown table
+sort:
+  enabled: true
+  by: name
+sections:
+  hide:
+    - modules
+    - resources
+settings:
+  anchor: true
+  default: true
+  escape: false
