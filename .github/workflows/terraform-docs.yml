@@ -1,0 +1,29 @@
+name: terraform-docs
+
+on:
+  pull_request:
+    paths:
+      - 'modules/**.tf'
+      - '.terraform-docs.yml'
+  workflow_dispatch:
+
+jobs:
+  generate:
+    name: Generate module docs
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write      # push changes to README
+      pull-requests: write # comment on PRs if needed
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Generate README for modules/network
+        uses: terraform-docs/gh-actions@v1.3.0
+        with:
+          working-dir: modules/network
+          output-file: README.md
+          output-method: replace
+          config-file: ./.terraform-docs.yml
+          git-commit-message: "chore(docs): terraform-docs update"
+          git-push: "true"
